@@ -12,6 +12,8 @@ router.get('/', (req, res) => {
 router.post('/create', (req, res) => {
     //OBTENDO AS INFORMAÇÕES QUE FORAM PASSADAS NA REQUISIÇÃO
     const user = req.body;
+    re = /^[\w\.]+[\w]@(?:\w+.)+\.\w+/
+    if (!re.test(user.email)) throw "Email inválido"
     //COMANDO SEQUELIZE PARA SALVAR OS DADOS NO BANCO DE DADOS
     User.create(user).then(() => {
         res.status(200).send("Usuário cadastrado com sucesso");

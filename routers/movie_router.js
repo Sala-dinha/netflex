@@ -54,7 +54,7 @@ router.delete('/delete/:id', (req, res) => {
             id_movie: req.params.id,
         }
     }).then(() => {
-        res.send("Filme destruído com sucesso!");
+        res.send("Filme excluído com sucesso!");
     }).catch((error) => {
         res.send("Falha ao deletar filme! Erro: " + error);
     });

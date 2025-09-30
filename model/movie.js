@@ -27,7 +27,9 @@ const Movie = db.sequelize.define('movie', {
     genero: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    }},
+    {
+        timestamps: false
 });
 
 Movie.sync({create:true});

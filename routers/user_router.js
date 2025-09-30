@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     res.send("Usuário!");
 });
 
-router.post('/create_user', (req, res) => {
+router.post('/create', (req, res) => {
     //OBTENDO AS INFORMAÇÕES QUE FORAM PASSADAS NA REQUISIÇÃO
     const user = req.body;
     //COMANDO SEQUELIZE PARA SALVAR OS DADOS NO BANCO DE DADOS
@@ -21,15 +21,11 @@ router.post('/create_user', (req, res) => {
 });
 
 //END-POINT CONSULTAR TODOS OS USUÁRIOS CADASTRADOS
-router.get('/list_users', (req, res) => {
+router.get('/list', (req, res) => {
     //SELECT * FROM user
     //then = try
     //catch
-    User.findAll({
-        attributes: {
-            exclude: ['createdAt', 'updatedAt']
-        }
-    }).then((users) => {
+    User.findAll().then((users) => {
         res.send(users);
     }).catch((error) => {
         res.send("Falha ao consultar usuários! Erro: " + error);
@@ -42,10 +38,6 @@ router.get('/find/:id', (req, res) => {
         where:
         {
             id_user: id,
-        },
-        attributes:
-        {
-            exclude: ['createdAt', 'updatedAt']
         }
     }).then((user) => {
         res.send(user);
@@ -68,7 +60,7 @@ router.put('/update', (req, res) => {
     });
 });
 
-router.put('/inactivate_user/:id', (req, res) => {
+router.put('/inactivate/:id', (req, res) => {
     const id = req.params.id;
     User.update({
         active: false
@@ -84,7 +76,7 @@ router.put('/inactivate_user/:id', (req, res) => {
     });
 });
 
-router.delete('/delete_user/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     User.destroy({
         where:
         {

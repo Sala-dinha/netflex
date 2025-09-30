@@ -18,6 +18,14 @@ router.post('/create', (req, res) => {
     });
 });
 
+router.get('/list', (req, res) => {
+    Movie.findAll().then((movies) => {
+        res.send(movies);
+    }).catch((error) => {
+        res.send("Falha ao consultar filmes! Erro: " + error);
+    });
+});
+
 router.get('/find/:id', (req, res) => {
     const id = req.params.id;
     Movie.findAll({

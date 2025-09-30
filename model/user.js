@@ -19,7 +19,9 @@ const User = db.sequelize.define('user', {
     },
     active: {
         type: DataTypes.BOOLEAN
-    }
+    }},
+    {
+        timestamps: false
 });
 
 

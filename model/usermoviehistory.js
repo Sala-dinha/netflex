@@ -1,12 +1,24 @@
 const { DataTypes} = require('sequelize');
 const db = require('../database/db');
 
-const History = db.sequelize.define('usermoviehistory', {
+const UserMovieHistory = db.sequelize.define('usermoviehistory', {
     tempo: {
         type: DataTypes.INTEGER,
     }    
 });
 
-History.sync({create:true});
+User = require('../model/user');
+Movie = require('../model/movie');
 
-module.exports = History;
+User.belongsToMany(Movie, {
+    through: UserMovieHistory,
+    foreignKey: 'id_user'
+});
+Movie.belongsToMany(User, {
+    through: UserMovieHistory,
+    foreignKey: 'id_movie'
+});
+
+UserMovieHistory.sync({create:true});
+
+module.exports = UserMovieHistory;

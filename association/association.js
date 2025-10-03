@@ -1,0 +1,3 @@
+
+UserMovieHistory = require('../model/usermoviehistory')
+

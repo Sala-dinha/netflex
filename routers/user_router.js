@@ -13,13 +13,17 @@ router.get('/', (req, res) => {
 
 router.post('/create', (req, res) => {
     const user = req.body;
-    re = /^[\w\.]+[\w]@(?:\w+.)+\.\w+/
-    if (!re.test(user.email)) throw "Email inválido"
-    User.create(user).then(() => {
-        res.status(200).send("Usuário cadastrado com sucesso");
-    }).catch((error) => {
-        res.status(403).send("Falha ao cadastrar! " + error);
-    });
+    re = /^[\w\.]+[\w]@(?:\w+\.)+\w+/
+    if (!re.test(user.email)){
+        res.send("Falha ao cadastrar! Email inválido");
+    }
+    else{
+        User.create(user).then(() => {
+            res.status(200).send("Usuário cadastrado com sucesso");
+        }).catch((error) => {
+            res.status(403).send("Falha ao cadastrar! " + error);
+        });
+}
 });
 
 router.get('/login', (req, res) => {

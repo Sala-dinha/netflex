@@ -1,6 +1,5 @@
 const { DataTypes, HasMany } = require('sequelize');
 const db = require('../database/db');
-const Post = require('./post');
 
 const User = db.sequelize.define('user', {
     id_user: {

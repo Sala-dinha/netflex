@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 const express = require('express');
 const router = express.Router();
 
@@ -10,11 +12,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-    //OBTENDO AS INFORMAÇÕES QUE FORAM PASSADAS NA REQUISIÇÃO
     const user = req.body;
     re = /^[\w\.]+[\w]@(?:\w+.)+\.\w+/
     if (!re.test(user.email)) throw "Email inválido"
-    //COMANDO SEQUELIZE PARA SALVAR OS DADOS NO BANCO DE DADOS
     User.create(user).then(() => {
         res.status(200).send("Usuário cadastrado com sucesso");
     }).catch((error) => {
@@ -22,11 +22,42 @@ router.post('/create', (req, res) => {
     });
 });
 
-//END-POINT CONSULTAR TODOS OS USUÁRIOS CADASTRADOS
+router.get('/login', (req, res) => {
+    email = req.body.email;
+    password = req.body.password;
+    User.findOne({
+        where: {
+            email: email
+        }
+    }).then((user) => {
+        if (!user){
+            res.status(404);
+            throw('Cadastro não encontrado');
+        }
+        
+        if (user.password != password){
+            res.status(401);
+            throw('Senha incorreta');
+        }
+
+        else{
+            let secret = Math.random().toString(36).substring(2,);
+            token = jwt.sign({email}, secret, {expiresIn: '24h'})
+            user.secret = secret;
+            user.save();
+            res.cookie('authToken', token, {
+                httpOnly: true,
+                sameSite: true
+            });
+            res.status(200).send('Login bem-sucedido')
+        }
+
+    }).catch((error) => {
+        res.send('Login não pode ser efetuado: ' + error);
+    });
+});
+
 router.get('/list', (req, res) => {
-    //SELECT * FROM user
-    //then = try
-    //catch
     User.findAll().then((users) => {
         res.send(users);
     }).catch((error) => {
@@ -36,11 +67,12 @@ router.get('/list', (req, res) => {
 
 router.get('/find/:id', (req, res) => {
     const id = req.params.id;
-    User.findAll({
+    User.findOne({
         where:
         {
             id_user: id,
-        }
+        },
+        attributes: {exclude: ['secret', 'password']}
     }).then((user) => {
         res.send(user);
     }).catch((error) => {
@@ -85,7 +117,7 @@ router.delete('/delete/:id', (req, res) => {
             id_user: req.params.id,
         }
     }).then(() => {
-        res.send("Usuário destruído com sucesso! (HEAD SHOT)");
+        res.send("Usuário destruído com sucesso!");
     }).catch((error) => {
         res.send("Falha ao deletar usuário! Erro: " + error);
     });

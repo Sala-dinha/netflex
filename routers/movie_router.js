@@ -18,14 +18,37 @@ router.post('/create', (req, res) => {
     });
 });
 
+
+// Listagem dos filmes, sem sinopse.
 router.get('/list', (req, res) => {
-    Movie.findAll().then((movies) => {
+    Movie.findAll({
+        attributes: {
+            exclude: ['sinopse']
+        }}
+    ).then((movies) => {
         res.send(movies);
     }).catch((error) => {
         res.send("Falha ao consultar filmes! Erro: " + error);
     });
 });
 
+// Listagem dos filmes por gênero, sem sinopse.
+router.get('/list/:genero', (req, res) => {
+    Movie.findAll({
+        where: {
+            genero: req.params.genero
+        },
+        attributes: {
+            exclude: ['sinopse']
+        }}
+    ).then((movies) => {
+        res.send(movies);
+    }).catch((error) => {
+        res.send("Falha ao consultar filmes! Erro: " + error);
+    });
+});
+
+// Recupera os dados de um filme pelo ID
 router.get('/find/:id', (req, res) => {
     const id = req.params.id;
     Movie.findAll({
@@ -40,6 +63,21 @@ router.get('/find/:id', (req, res) => {
     });
 });
 
+// Recupera somente a sinopse de um filme.
+router.get('/sinopsis/:id', (req, res) => {
+    const id = req.params.id;
+    Movie.findOne({
+        where:
+        {
+            id_movie: id,
+        },
+        attributes: ['sinopse']        
+    }).then((movie) => {
+        res.send(movie);
+    }).catch((error) => {
+        res.send("Falha ao consultar Filme! Erro: " + error);
+    });
+});
 
 router.put('/update', (req, res) => {
     const upd_movie = req.body;

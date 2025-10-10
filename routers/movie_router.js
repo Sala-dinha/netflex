@@ -18,7 +18,6 @@ router.post('/create', (req, res) => {
     });
 });
 
-
 // Listagem dos filmes, sem sinopse.
 router.get('/list', (req, res) => {
     Movie.findAll({
@@ -33,10 +32,10 @@ router.get('/list', (req, res) => {
 });
 
 // Listagem dos filmes por gênero, sem sinopse.
-router.get('/list/:genero', (req, res) => {
+router.get('/list/:id', (req, res) => {
     Movie.findAll({
         where: {
-            genero: req.params.genero
+            id_genero: req.params.id
         },
         attributes: {
             exclude: ['sinopse']
@@ -46,6 +45,17 @@ router.get('/list/:genero', (req, res) => {
     }).catch((error) => {
         res.send("Falha ao consultar filmes! Erro: " + error);
     });
+});
+
+Genre = require('../model/genre');
+router.get('/by_genre', (req, res) => {
+    Genre.findAll({
+        include: Movie
+    }).then((result) => {
+        res.send(result);
+    }).catch((error) => {
+        res.send("Falha ao consultar filmes! Erro: " + error);
+    })
 });
 
 // Recupera os dados de um filme pelo ID

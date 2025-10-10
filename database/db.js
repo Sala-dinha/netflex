@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize(
     'Netflex',
     'root',
-    '123456',
+    '',
     //INSERINDO A INFORMAÇÃO DO BANCO (ONDE ESTÁ E QUAL É O BANCO QUE SERÁ UTILIZADO)
     {
         host: 'localhost',

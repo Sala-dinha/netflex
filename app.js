@@ -2,6 +2,8 @@ const express = require('express');
 
 const app = express();
 
+association = require('./association/association')
+
 const user_router = require('./routers/user_router');
 app.use('/user', user_router);
 

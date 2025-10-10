@@ -1,3 +1,12 @@
+Genre = require('../model/genre');
+Movie = require('../model/movie');
 
-UserMovieHistory = require('../model/usermoviehistory')
+Movie.belongTo(Genre, {
+    constraint: true,
+    foreignKey: 'id_genre'
+});
 
+Genre.hasMany(Movie, {
+    constraint: true,
+    foreignKey: 'id_genre'
+})

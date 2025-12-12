@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Netflex</title>
+        <link rel="icon" href="./imagens/flex.png"/>
+        <link rel="stylesheet" href="style.css"/>
+        <script src="./script.js"></script>
+    </head>
+    <body>   
+        <div class="quadrado">
+            <h1>Crie uma conta:</h1>
+            <form action="create" method="post">
+                <input type="text" name="email" placeholder="Email"/><br/>
+                <input type="password" name="password" id="password" placeholder="Senha"/>
+                <button type="button" id="mostrasenha" onclick="alternaSenha('#password', '#olho')">
+                    <img id="olho" src="./imagens/olho_abrido.png">
+                </button><br/>
+                <button type="submit">Criar</button><br/>
+                <!-- fazer função de checagem dos dados -->
+                <input type="checkbox" id="lembrar" value="lembrar"/>
+                <label for="lembrar">Lembre-se de mim</label>
+            </form>
+            <p>Caso já tenha uma conta <a href="./login">clique aqui.</a></p>
+        </div>
+
+    </body>
+
+
+</html>

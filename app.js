@@ -5,6 +5,8 @@ const app = express();
 
 app.engine('handlebars', engine({defaultLayout:'main'}));
 app.set('view engine', 'handlebars');
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static('public'))
 
 association = require('./association/association')

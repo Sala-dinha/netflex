@@ -1,12 +1,12 @@
  <div class="quadrado">
             <h1>Entrar:</h1>
-            <form action="login" method="get">
-                <input type="text" placeholder="Email"/><br/>
-                <input type="password" placeholder="Senha"/><br/>
+            <form action="login" method="post">
+                <input type="text" name="email" placeholder="Email"/><br/>
+                <input type="password" name="password" placeholder="Senha"/><br/>
                 <button type="submit">Entrar</button><br/>
                 <!-- fazer função de checagem dos dados -->
                 <input type="checkbox" id="lembrar" value="lembrar"/>
                 <label for="lembrar">Lembre-se de mim</label>
-                <p>Caso não tenha uma conta <a href="./registro.html">clique aqui.</a></p>
+                <p>Caso não tenha uma conta <a href="./create">clique aqui.</a></p>
             </form>
 </div>

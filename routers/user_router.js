@@ -11,6 +11,10 @@ router.get('/', (req, res) => {
     res.send("Usuário!");
 });
 
+router.get('/create', (req, res) => {
+    res.render('registro')
+});
+
 router.post('/create', (req, res) => {
     const user = req.body;
     re = /^[\w\.]+[\w]@(?:\w+\.)+\w+/
@@ -19,14 +23,20 @@ router.post('/create', (req, res) => {
     }
     else{
         User.create(user).then(() => {
-            res.status(200).send("Usuário cadastrado com sucesso");
+            // res.status(200).send("Usuário cadastrado com sucesso");
+            res.status(200).render('login')
         }).catch((error) => {
             res.status(403).send("Falha ao cadastrar! " + error);
         });
 }
 });
+router.use(express.static('./public'))
 
 router.get('/login', (req, res) => {
+    res.render('login')
+});
+
+router.post('/login', (req, res) => {
     email = req.body.email;
     password = req.body.password;
     User.findOne({
@@ -53,7 +63,9 @@ router.get('/login', (req, res) => {
                 httpOnly: true,
                 sameSite: true
             });
-            res.status(200).send('Login bem-sucedido')
+            res.status(200)
+            res.render('home')
+            console.log('deu bom')
         }
 
     }).catch((error) => {

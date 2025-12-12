@@ -1,7 +1,12 @@
 body{
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("./imagens/fundo.jpg");
     background-size: cover;
+    background-color: black;
     color: white;
+    padding: 2%;
+}
+.home{
+    
 }
 /*all*/
 #cabecalho{
@@ -13,7 +18,25 @@ body{
 #cabecalho a{
     display: block;
 }
+.listafilmes{
+    max-width: 90vw;
+    overflow-x: auto;
+    column-gap: 1rem;
+}
 
+#destaque{
+    min-height: 60vh;
+    max-height: 100vh;
+    position: relative;
+}
+.sobre{
+    margin-top: 5%;
+}
+
+.baixo{
+    position: absolute;
+    bottom: 2rem;
+}
 
 .horizontal{
     display:flex;

@@ -8,3 +8,7 @@ function alternaSenha(elmnt, img){
     
 }
 
+function trocaFundo(elmnt, fundo){
+    let element = document.querySelector(elmnt)
+    element.style.backgroundImage = fundo;
+}

@@ -26,8 +26,9 @@ const Movie = db.sequelize.define('movie', {
     }},
     {
         timestamps: false
-});
+    }
+);
 
-Movie.sync({create:true});
+Movie.sync({create:true, alter:true});
 
 module.exports = Movie;

@@ -4,8 +4,8 @@ const db = require('../database/db');
 const Genre = db.sequelize.define('genre', {
     id_genre: {
         type: DataTypes.INTEGER,
-        auto_increment: true,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false
     },
     nome: {
@@ -17,6 +17,6 @@ const Genre = db.sequelize.define('genre', {
     }
 );
 
-Genre.sync({create:true});
+Genre.sync({create:true, alter:true});
 
 module.exports = Genre;

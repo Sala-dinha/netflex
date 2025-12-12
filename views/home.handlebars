@@ -18,42 +18,16 @@
         </div>
         <div id="filmes">
             <div>
-                <p class="legenda">Em Alta</p>
-                <div class="horizontal">
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
-                </div>
-                </div>
+                {{#each genero}}
+                    <p class="legenda">{{nome}}</p>
+                    <div class="horizontal">
+                    {{#each filmes}}
+                        <div class="filme">
+                            <img src="https://placehold.co/100x150/png">
+                        </div>
+                    {{/each}}
+                    </div>
+                {{/each}}
             </div>
         </div>
     </div>

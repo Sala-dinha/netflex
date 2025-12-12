@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Movie = require('../model/movie');
+const Genre = require('../model/genre');
 
 router.use(express.json());
 
@@ -10,8 +11,12 @@ router.get('/', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-    const new_movie = req.body;
-    Movie.create(new_movie).then(() => {
+    const {genres, ...data} = req.body;
+    Movie.create(data).then((movie) => {
+
+        if (genres && genres.length > 0){
+            movie.setGenres(genres);
+        }
         res.status(200).send("Filme cadastrado com sucesso");
     }).catch((error) => {
         res.status(403).send("Falha ao cadastrar! " + error);
@@ -31,23 +36,30 @@ router.get('/list', (req, res) => {
     });
 });
 
-// Listagem dos filmes por gênero, sem sinopse.
+// Listagem dos filmes por gênero.
 router.get('/list/:id', (req, res) => {
-    Movie.findAll({
+    // Movie.findAll({
+    //     where: {
+    //         id_genero: req.params.id
+    //     },
+    //     attributes: {
+    //         exclude: ['sinopse']
+    //     }}
+    // ).then((movies) => {
+    //     res.send(movies);
+    // }).catch((error) => {
+    //     res.send("Falha ao consultar filmes! Erro: " + error);
+    // });
+    Genre.findOne({
         where: {
-            id_genero: req.params.id
+            genreIDGenre: req.params.id
         },
-        attributes: {
-            exclude: ['sinopse']
-        }}
-    ).then((movies) => {
-        res.send(movies);
-    }).catch((error) => {
-        res.send("Falha ao consultar filmes! Erro: " + error);
-    });
+        include: Movie
+    }).then( (result) =>
+        res.send(result)
+    )
 });
 
-Genre = require('../model/genre');
 router.get('/by_genre', (req, res) => {
     Genre.findAll({
         include: Movie

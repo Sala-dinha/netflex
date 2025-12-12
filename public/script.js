@@ -7,3 +7,4 @@ function alternaSenha(elmnt, img){
     }
     
 }
+

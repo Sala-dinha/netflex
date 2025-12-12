@@ -24,7 +24,7 @@ router.post('/create', (req, res) => {
     else{
         User.create(user).then(() => {
             // res.status(200).send("Usuário cadastrado com sucesso");
-            res.status(200).render('login')
+            res.status(200).redirect('login')
         }).catch((error) => {
             res.status(403).send("Falha ao cadastrar! " + error);
         });
@@ -63,9 +63,7 @@ router.post('/login', (req, res) => {
                 httpOnly: true,
                 sameSite: true
             });
-            res.status(200)
-            res.render('home')
-            console.log('deu bom')
+            res.status(200).redirect('/home')
         }
 
     }).catch((error) => {

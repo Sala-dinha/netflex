@@ -17,4 +17,7 @@ app.use('/user', user_router);
 const movie_router = require('./routers/movie_router');
 app.use('/movie', movie_router);
 
+const front_router = require('./routers/front_router');
+app.use('/', front_router);
+
 app.listen(3000);

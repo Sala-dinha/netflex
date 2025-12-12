@@ -1,11 +1,10 @@
 <div id="destaque">
-    <div class="sobre">
-        <img class="titulo" src="https://placehold.co/300x200/png">
-        <div class="baixo">
-            <p class="sinopse">Lorem ipsum dolor sit amet</p>
-            <button>Assistir</button>
-            <button>Mais informações</button>
-        </div>
+    <img class="titulo" src="/imagens/movies/minecraft/logo.png">
+    <div class="baixo">
+        <h2>Um Filme Minecraft</h2>
+        <p class="sinopse">Quatro desajustados são transportados para um bizarro país das maravilhas cúbico onde impera a imaginação. Para voltar para casa, eles terão que dominar este mundo enquanto embarcam em uma missão com um experiente construtor imprevisível.</p>
+        <button>Assistir</button>
+        <button>Mais informações</button>
     </div>
 </div>
 <div id="filmes">
@@ -14,8 +13,8 @@
             <p class="legenda">{{nome}}</p>
             <div class="horizontal listafilmes">
             {{#each movies}}
-                <div class="filme">
-                    <img src="https://placehold.co/100x150/png">
+                <div class="filme" id_movie="{{id_movie}}">
+                    <img src="./imagens/movies/{{id_movie}}/{{capa}}">
                 </div>
             {{/each}}
             </div>

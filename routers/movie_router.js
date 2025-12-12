@@ -12,12 +12,13 @@ router.get('/', (req, res) => {
 
 router.post('/create', (req, res) => {
     const {genres, ...data} = req.body;
+    console.log(req.body)
     Movie.create(data).then((movie) => {
 
         if (genres && genres.length > 0){
             movie.setGenres(genres);
         }
-        res.status(200).send("Filme cadastrado com sucesso");
+        res.status(200).redirect('create');
     }).catch((error) => {
         res.status(403).send("Falha ao cadastrar! " + error);
     });
@@ -127,5 +128,9 @@ router.delete('/delete/:id', (req, res) => {
         res.send("Falha ao deletar filme! Erro: " + error);
     });
 });
+
+router.get('/create', (req, res) => {
+    res.render('upar')
+})
 
 module.exports = router;

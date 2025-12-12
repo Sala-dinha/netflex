@@ -23,6 +23,15 @@ const Movie = db.sequelize.define('movie', {
     classificacao: {
         type: DataTypes.INTEGER,
         allowNull: false        
+    },
+    capa: {
+        type: DataTypes.STRING,
+    },
+    logo: {
+        type: DataTypes.STRING,
+    },
+    banner: {
+        type: DataTypes.STRING,
     }},
     {
         timestamps: false

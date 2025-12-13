@@ -2,7 +2,10 @@
             <h1>Entrar:</h1>
             <form action="/user/login" method="post">
                 <input type="text" name="email" placeholder="Email"/><br/>
-                <input type="password" name="password" placeholder="Senha"/><br/>
+                <input type="password" name="password" id="password" placeholder="Senha"/>
+                <button type="button" id="mostrasenha" onclick="alternaSenha('#password', '#olho')">
+                    <img id="olho" src="./imagens/olho_abrido.png">
+                </button><br/>
                 <button type="submit">Entrar</button><br/>
                 <!-- fazer função de checagem dos dados -->
                 <input type="checkbox" id="lembrar" value="lembrar"/>

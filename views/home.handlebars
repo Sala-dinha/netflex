@@ -14,7 +14,7 @@
             <div class="horizontal listafilmes">
             {{#each movies}}
                 <div class="filme" id_movie="{{id_movie}}">
-                    <img src="./imagens/movies/{{id_movie}}/{{capa}}">
+                    <img src="./imagens/movies/{{id_movie}}/{{capa}}"/>
                 </div>
             {{/each}}
             </div>
@@ -22,5 +22,46 @@
     </div>
 </div>
 <script>
-    document.querySelector('body').classList.add('home')
+    function getOffset(el) {
+        const rect = el.getBoundingClientRect();
+        return {
+            left: rect.left + window.scrollX,
+            top: rect.top + window.scrollY
+        };
+    }
+    document.querySelector('body').classList.add('home');
+
+    let filmes = document.querySelectorAll('.filme')
+    filmes.forEach((filme) => {
+        async function x(){
+            let movie = await (await fetch('/movie/find/' + filme.getAttribute('id_movie'))).json();
+            let card = document.createElement('div')
+            console.log(movie);
+            card.classList.add('card')
+            card.style.backgroundImage = `linear-gradient(rgba(73, 73, 73, 0.5), black 50%), url('imagens/movies/${movie.id_movie}/${movie.banner}')`
+            card.innerHTML = 
+            `
+            <img src="imagens/movies/${movie.id_movie}/${movie.logo}" width="300px">
+            <h2>${movie.titulo}</h2>
+            <p class="idade">${(movie.classificacao == 0 ? 'E' : '+' + movie.classificacao)}</p>
+            <p>${movie.sinopse}</p>
+            <p><button onclick="window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygULcmljayBhc3RsZXk%3D'">Assistir</button>   <button>Adicionar à lista</button></p>
+            `
+            card.style.top = getOffset(filme).top - filme.clientHeight + 'px';
+            card.style.left = getOffset(filme).left + filme.clientWidth + 'px';
+            if (getOffset(filme).left + filme.clientWidth + 500 > window.innerWidth){
+                card.style.left = getOffset(filme).left - 500 + 'px';
+            }
+            document.body.appendChild(card);
+        }
+        filme.addEventListener('click', () => x())
+    })
+    window.addEventListener('click', (e) => {
+        if (!e.target.closest(".card")){
+            let cards = document.querySelectorAll('.card')
+            for (card of cards){
+                    card.parentNode.removeChild(card)
+        }
+       }
+    })
 </script>

@@ -23,14 +23,25 @@ body{
     font-weight: bold;
 }
 
+
+.filme{
+    transition: 1.25s;
+    box-sizing: content-box;
+    border: 2px solid rgba(255, 255, 255, 0);
+    height: 300px;
+}
+
+.filme:hover{
+    cursor: pointer;
+    transition: 0.25s;
+    border: 2px solid rgb(255, 0, 0);
+}
 .listafilmes::-webkit-scrollbar {
     width: 10px;
 }
-
 .listafilmes::-webkit-scrollbar-track {
     background-color: #95a5a6;
 }
-
 .listafilmes::-webkit-scrollbar-thumb {
     background-color: #ff0000;
 }
@@ -54,6 +65,7 @@ body{
     display: block;
 }
 .listafilmes{
+    height: 330px;
     max-width: 90vw;
     overflow-x: auto;
     column-gap: 1rem;
@@ -121,17 +133,41 @@ input[type="text"], input[type="password"]{
     border: solid rgb(73, 73, 73) 1px;
 }
 
+.card{
+    position: absolute;
+    background-image: linear-gradient(rgb(73, 73, 73), black);
+    background-color: black;
+    padding: 2rem;
+    width: 500px;
+    border: 2px solid rgb(98, 98, 98);
+    box-sizing: border-box;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.idade{
+    border: 1px solid white;
+    border-radius: 5px;
+    aspect-ratio: 1;
+    padding: 2px;
+    text-align: center;
+    line-height: 1.6rem;
+    width: 1.6rem;
+
+}
+
 button{
     text-decoration: none;
     color: white;
     background-color: red;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0);
     border-radius: .4rem;
     padding: .7rem 2rem;
     font-size: 1.2rem;
     margin-bottom: 1rem;
 }
 button:hover{
+    border: 2px solid white;
     cursor: pointer;
 }
 

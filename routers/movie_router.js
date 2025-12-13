@@ -74,7 +74,7 @@ router.get('/by_genre', (req, res) => {
 // Recupera os dados de um filme pelo ID
 router.get('/find/:id', (req, res) => {
     const id = req.params.id;
-    Movie.findAll({
+    Movie.findOne({
         where:
         {
             id_movie: id,
